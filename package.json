@@ -1,0 +1,31 @@
+{
+  "name": "fastroute",
+  "version": "1.0.0",
+  "description": "Lib for to make a fast routing",
+  "main": "route.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SergeiWal/fastroute.git"
+  },
+  "keywords": [
+    "routing",
+    "node",
+    "http",
+    "server",
+    "http-server",
+    "request",
+    "response",
+    "fast",
+    "fastroute",
+    "route"
+  ],
+  "author": "Valko Sergei",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SergeiWal/fastroute/issues"
+  },
+  "homepage": "https://github.com/SergeiWal/fastroute#readme"
+}
