@@ -1,13 +1,6 @@
-const http = require("http");
-const fastroute = require("./route");
+const server = require("./route").fastserver(5000);
 
-const server = http.createServer();
-const route = fastroute.route(server);
-server.listen(5000, () => {
-  console.log("Server is started on http://localhost:5000/");
-});
-
-route
+server
   .get("/", (req, res) => {
     res.writeHead(200, { "Content-Type": "text/plain" });
     res.end("Get request...");

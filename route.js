@@ -1,59 +1,67 @@
-class Route {
-  constructor(server) {
-    this._url = require("url");
-    this._server = server;
-  }
+const url = require("url");
+const http = require("http");
 
-  _route(callback, path, method = "GET") {
-    this._server.on("request", (req, res) => {
-      if (req.method === method) {
-        const url = this._url.parse(req.url).pathname;
-        if (path == url) {
-          callback(req, res);
-        }
+let _server;
+const _route = function (callback, path, method = "GET") {
+  _server.on("request", (req, res) => {
+    if (req.method === method) {
+      const currentPath = url.parse(req.url).pathname;
+      if (path == currentPath) {
+        callback(req, res);
       }
-    });
-    return this;
-  }
+    }
+  });
+};
 
-  all(path, ...callback) {
-    this._server.on("request", (req, res) => {
-      const url = this._url.parse(req.url).pathname;
-      if (path == url) {
+function Route(port) {
+  _server = http.createServer().listen(port);
+  console.log(`Server is started on http://localhost:${port}/`);
+
+  this.all = (path, ...callback) => {
+    _server.on("request", (req, res) => {
+      const currentPath = url.parse(req.url).pathname;
+      if (path == currentPath) {
         callback.forEach((item) => {
           item(req, res);
         });
       }
     });
-  }
+  };
 
-  get(path, callback) {
-    return this._route(callback, path);
-  }
+  this.get = (path, callback) => {
+    _route(callback, path);
+    return this;
+  };
 
-  post(path, callback) {
-    return this._route(callback, path, "POST");
-  }
+  this.post = (path, callback) => {
+    _route(callback, path, "POST");
+    return this;
+  };
 
-  put(path, callback) {
-    return this._route(callback, path, "PUT");
-  }
+  this.put = (path, callback) => {
+    _route(callback, path, "PUT");
+    return this;
+  };
 
-  delete(path, callback) {
-    return this._route(callback, path, "DELETE");
-  }
+  this.delete = (path, callback) => {
+    _route(callback, path, "DELETE");
+    return this;
+  };
 
-  head(path, callback) {
-    return this._route(callback, path, "HEAD");
-  }
+  this.head = (path, callback) => {
+    _route(callback, path, "HEAD");
+    return this;
+  };
 
-  patch(path, callback) {
-    return this._route(callback, path, "PATCH");
-  }
+  this.patch = (path, callback) => {
+    _route(callback, path, "PATCH");
+    return this;
+  };
 
-  options(path, callback) {
-    return this._route(callback, path, "OPTIONS");
-  }
+  this.options = (path, callback) => {
+    _route(callback, path, "OPTIONS");
+    return this;
+  };
 }
 
-module.exports.route = (server) => new Route(server);
+module.exports.fastserver = (port = 3000) => new Route(port);
