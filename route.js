@@ -13,6 +13,7 @@ class Route {
         }
       }
     });
+    return this;
   }
 
   all(path, ...callback) {
@@ -27,31 +28,31 @@ class Route {
   }
 
   get(path, callback) {
-    this._route(callback, path);
+    return this._route(callback, path);
   }
 
   post(path, callback) {
-    this._route(callback, path, "POST");
+    return this._route(callback, path, "POST");
   }
 
   put(path, callback) {
-    this._route(callback, path, "PUT");
+    return this._route(callback, path, "PUT");
   }
 
   delete(path, callback) {
-    this._route(callback, path, "DELETE");
+    return this._route(callback, path, "DELETE");
   }
 
   head(path, callback) {
-    this._route(callback, path, "HEAD");
+    return this._route(callback, path, "HEAD");
   }
 
   patch(path, callback) {
-    this._route(callback, path, "PATCH");
+    return this._route(callback, path, "PATCH");
   }
 
   options(path, callback) {
-    this._route(callback, path, "OPTIONS");
+    return this._route(callback, path, "OPTIONS");
   }
 }
 
